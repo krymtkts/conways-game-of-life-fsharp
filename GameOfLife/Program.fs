@@ -8,11 +8,20 @@ let writer =
     sw |> Console.SetOut
     sw
 
+let startPosition =
+    do Console.Clear()
+
+    Console.GetCursorPosition().ToTuple()
+    |> fun (x, y) -> x, y + 1
+
 let inline printGameState game loop alive =
     let symbol cell =
         match cell with
         | Live -> "X"
         | Dead -> " "
+
+    $"Inputs: %d{game.height} %d{game.width}"
+    |> Console.WriteLine
 
     $"#Loop: {loop}        Living: {alive}"
     |> Console.WriteLine
@@ -31,7 +40,7 @@ let inline printGameState game loop alive =
 let rec GameLoop game loopNumber =
     let alive = countLive game.Grid
 
-    do Console.Clear()
+    do Console.SetCursorPosition startPosition
     do printGameState game loopNumber alive
     do Async.Sleep 100 |> Async.RunSynchronously
 
@@ -50,7 +59,6 @@ let MakeGameBoard height width =
 
 [<EntryPoint>]
 let main argv =
-    $"Inputs: {argv}" |> Console.WriteLine
     let height = Array.get argv 0 |> Int32.Parse
     let width = Array.get argv 1 |> Int32.Parse
 

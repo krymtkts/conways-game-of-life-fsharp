@@ -1,8 +1,6 @@
 module GameOfLife.Game
 
-type Dead = Dead of bool
-type Live = Live of bool
-
+[<Struct>]
 type Cell =
     | Dead
     | Live
@@ -51,9 +49,9 @@ let inline cycleElement game index element =
     let neighbors = List.mapi (fun x y -> liveAt game y) neighborRange
     let neighborsLive = List.sumBy (fun x -> isCellLive x) neighbors
 
-    match neighborsLive with
-    | x when element = Live && (x = 2 || x = 3) -> Live
-    | x when element = Dead && x = 3 -> Live
+    match element, neighborsLive with
+    | Live, x when element = Live && (x = 2 || x = 3) -> Live
+    | Dead, x when element = Dead && x = 3 -> Live
     | _ -> Dead
 
 let inline Cycle game =

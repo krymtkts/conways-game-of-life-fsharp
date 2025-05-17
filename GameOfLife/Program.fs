@@ -39,15 +39,17 @@ let inline printGameState game loop alive =
 
 [<TailCall>]
 let rec GameLoop game loopNumber =
-    let alive = countLive game.Grid
+    async {
+        let alive = countLive game.Grid
 
-    do Console.SetCursorPosition startPosition
-    do printGameState game loopNumber alive
-    do Async.Sleep 100 |> Async.RunSynchronously
+        Console.SetCursorPosition startPosition
+        printGameState game loopNumber alive
+        do! Async.Sleep 100
 
-    match alive with
-    | 0 -> "Game Over" |> Console.Write
-    | _ -> game |> Cycle |> GameLoop <| 1 + loopNumber
+        match alive with
+        | 0 -> "Game Over" |> Console.Write
+        | _ -> return! game |> Cycle |> GameLoop <| 1 + loopNumber
+    }
 
 let MakeGameBoard height width =
     let random = Random()
@@ -69,4 +71,6 @@ let main argv =
           width = width }
 
     GameLoop initialGameState 0
+    |> Async.RunSynchronously
+
     0 // return an integer exit code

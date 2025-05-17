@@ -8,16 +8,11 @@ let writer =
     sw |> Console.SetOut
     sw
 
-let inline AliveCount grid =
-    List.sumBy (fun x -> if x = Live then 1 else 0) grid
-
-let inline printGameState game loop =
+let inline printGameState game loop alive =
     let symbol cell =
         match cell with
         | Live -> "X"
         | Dead -> " "
-
-    let alive = AliveCount game.Grid
 
     $"#Loop: {loop}        Living: {alive}"
     |> Console.WriteLine
@@ -34,11 +29,13 @@ let inline printGameState game loop =
     writer.Flush()
 
 let rec GameLoop game loopNumber =
+    let alive = countLive game.Grid
+
     do Console.Clear()
-    do printGameState game loopNumber
+    do printGameState game loopNumber alive
     do Async.Sleep 100 |> Async.RunSynchronously
 
-    match AliveCount game.Grid with
+    match alive with
     | 0 -> "Game Over" |> Console.Write
     | _ -> game |> Cycle |> GameLoop <| 1 + loopNumber
 

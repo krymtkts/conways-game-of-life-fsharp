@@ -17,11 +17,6 @@ let inline toXY game index =
 
 let inline toIndex game x y = y * game.width + x
 
-let inline isCellLive cell =
-    match cell with
-    | Dead -> 0
-    | Live -> 1
-
 let inline (|OutOfRange|_|) grid (x, y) =
     x < 0
     || x >= grid.width
@@ -47,6 +42,13 @@ let inline calcNeighborsRange game index =
       x, y - 1
       x + 1, y - 1 ]
 
+let inline countLive cells =
+    List.sumBy
+    <| function
+        | Live -> 1
+        | Dead -> 0
+    <| cells
+
 let inline (|Survive|_|) (cell: Cell, lives) = cell.IsLive && (lives = 2 || lives = 3)
 let inline (|Birth|_|) (cell: Cell, lives) = cell.IsDead && lives = 3
 
@@ -54,7 +56,7 @@ let inline cycleElement game index element =
     let neighborsLive =
         calcNeighborsRange game index
         |> List.map (fun neighbor -> liveAt game neighbor)
-        |> List.sumBy (fun x -> isCellLive x)
+        |> countLive
 
     match element, neighborsLive with
     | Birth

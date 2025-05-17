@@ -31,7 +31,7 @@ let inline liveAt grid (x, y) =
         List.item index grid.Grid
 
 let inline calcNeighborsRange game index =
-    let (x, y) = toXY game index
+    let x, y = toXY game index
 
     [ x - 1, y + 1
       x, y + 1

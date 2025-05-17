@@ -46,7 +46,7 @@ let ``two horizontal live cells dies from under population`` () =
     Assert.Equal(Dead, liveAt grid (1, 0))
 
 [<Fact>]
-let ``tree live cells lives on to the next generation and a new is reproduced in 4x4`` () =
+let ``three live cells lives on to the next generation and a new is reproduced in 4x4`` () =
     let grid =
         { Grid = [| Live; Live; Live; Dead |]
           height = 2

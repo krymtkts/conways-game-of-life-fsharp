@@ -1,5 +1,4 @@
 ﻿open System
-open System.Threading
 open GameOfLife.Game
 open System.IO
 
@@ -37,7 +36,7 @@ let inline printGameState game loop =
 let rec GameLoop game loopNumber =
     do Console.Clear()
     do printGameState game loopNumber
-    do Thread.Sleep(100)
+    do Async.Sleep 100 |> Async.RunSynchronously
 
     match AliveCount game.Grid with
     | 0 -> "Game Over" |> Console.Write

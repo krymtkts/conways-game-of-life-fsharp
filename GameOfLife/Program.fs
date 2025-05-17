@@ -28,7 +28,7 @@ let inline printGameState game loop alive =
 
     "" |> Console.WriteLine
 
-    List.iteri
+    Array.iteri
         (fun index cell ->
             match index % game.width with
             | a when a + 1 = game.width -> symbol cell |> Console.WriteLine
@@ -51,7 +51,7 @@ let rec GameLoop game loopNumber =
 let MakeGameBoard height width =
     let random = Random()
 
-    List.init (height * width) (fun _ ->
+    Array.init (height * width) (fun _ ->
         if random.NextDouble() > 0.41 then
             Live
         else

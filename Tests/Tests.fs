@@ -7,7 +7,7 @@ open GameOfLife.Game
 [<Fact>]
 let ``a cell without neighbors stays dead`` () =
     let grid =
-        { Grid = [ Dead ]
+        { Grid = [| Dead |]
           height = 1
           width = 1 }
         |> Cycle
@@ -17,7 +17,7 @@ let ``a cell without neighbors stays dead`` () =
 [<Fact>]
 let ``a cell without neighbors dies`` () =
     let grid =
-        { Grid = [ Live ]
+        { Grid = [| Live |]
           height = 1
           width = 1 }
         |> Cycle
@@ -27,7 +27,7 @@ let ``a cell without neighbors dies`` () =
 [<Fact>]
 let ``two vertical live cells dies from under population`` () =
     let grid =
-        { Grid = [ Live; Live ]
+        { Grid = [| Live; Live |]
           height = 2
           width = 1 }
         |> Cycle
@@ -38,7 +38,7 @@ let ``two vertical live cells dies from under population`` () =
 [<Fact>]
 let ``two horizontal live cells dies from under population`` () =
     let grid =
-        { Grid = [ Live; Live ]
+        { Grid = [| Live; Live |]
           height = 1
           width = 2 }
         |> Cycle
@@ -49,7 +49,7 @@ let ``two horizontal live cells dies from under population`` () =
 [<Fact>]
 let ``tree live cells lives on to the next generation and a new is reproduced in 4x4`` () =
     let grid =
-        { Grid = [ Live; Live; Live; Dead ]
+        { Grid = [| Live; Live; Live; Dead |]
           height = 2
           width = 2 }
         |> Cycle
@@ -62,7 +62,7 @@ let ``tree live cells lives on to the next generation and a new is reproduced in
 [<Fact>]
 let ``four horizontal lives on to the next generation`` () =
     let grid =
-        { Grid = [ Live; Live; Live; Live ]
+        { Grid = [| Live; Live; Live; Live |]
           height = 2
           width = 2 }
         |> Cycle
@@ -76,22 +76,22 @@ let ``four horizontal lives on to the next generation`` () =
 let ``Block stays block`` () =
     let grid =
         { Grid =
-            [ Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Live
-              Live
-              Dead
-              Dead
-              Live
-              Live
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead ]
+            [| Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Live
+               Live
+               Dead
+               Dead
+               Live
+               Live
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead |]
           height = 4
           width = 4 }
 
@@ -103,36 +103,36 @@ let ``Block stays block`` () =
 let ``Beehive stays Beehive`` () =
     let grid =
         { Grid =
-            [ Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Live
-              Live
-              Dead
-              Dead
-              Dead
-              Live
-              Dead
-              Dead
-              Live
-              Dead
-              Dead
-              Dead
-              Live
-              Live
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead ]
+            [| Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Live
+               Live
+               Dead
+               Dead
+               Dead
+               Live
+               Dead
+               Dead
+               Live
+               Dead
+               Dead
+               Dead
+               Live
+               Live
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead |]
           height = 5
           width = 6 }
 
@@ -144,42 +144,42 @@ let ``Beehive stays Beehive`` () =
 let ``Toad becomes toad after two cycles`` () =
     let grid =
         { Grid =
-            [ Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Live
-              Live
-              Live
-              Dead
-              Dead
-              Live
-              Live
-              Live
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead
-              Dead ]
+            [| Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Live
+               Live
+               Live
+               Dead
+               Dead
+               Live
+               Live
+               Live
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead
+               Dead |]
           height = 5
           width = 6 }
 

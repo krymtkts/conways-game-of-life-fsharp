@@ -37,6 +37,7 @@ let inline printGameState game loop alive =
 
     writer.Flush()
 
+[<TailCall>]
 let rec GameLoop game loopNumber =
     let alive = countLive game.Grid
 

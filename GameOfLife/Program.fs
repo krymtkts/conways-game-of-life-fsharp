@@ -1,6 +1,13 @@
 ﻿open System
 open System.Threading
 open GameOfLife.Game
+open System.IO
+
+let writer = 
+    let sw = new StreamWriter(Console.OpenStandardOutput())
+    sw.AutoFlush <- false
+    sw |> Console.SetOut
+    sw
 
 let inline AliveCount grid =
     List.sumBy (fun x -> if x = Live then 1 else 0) grid
@@ -16,6 +23,7 @@ let inline printGameState game loop =
         match index % game.width with
         | a when a+1 = game.width ->  symbol cell |> Console.WriteLine
         | _ ->  symbol cell |> Console.Write) game.Grid
+    writer.Flush()
 
 let rec GameLoop game loopNumber =
     do Console.Clear()

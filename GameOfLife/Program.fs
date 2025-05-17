@@ -44,6 +44,6 @@ let main argv =
     let height = Array.get argv 0 |> Int32.Parse
     let width = Array.get argv 1 |> Int32.Parse
 
-    let initalGameState = {Grid = MakeGameBoard height width; height = height; width = width}
-    GameLoop initalGameState 0
+    let initialGameState = {Grid = MakeGameBoard height width; height = height; width = width}
+    GameLoop initialGameState 0
     0 // return an integer exit code

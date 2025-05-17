@@ -14,12 +14,12 @@ let startPosition =
     Console.GetCursorPosition().ToTuple()
     |> fun (x, y) -> x, y + 1
 
-let inline printGameState game loop alive =
-    let symbol cell =
-        match cell with
-        | Live -> "X"
-        | Dead -> " "
+let inline symbol cell =
+    match cell with
+    | Live -> "X"
+    | Dead -> " "
 
+let inline printGameState game loop alive =
     $"Inputs: %d{game.height} %d{game.width}"
     |> Console.WriteLine
 
@@ -51,7 +51,7 @@ let rec GameLoop game loopNumber =
 let MakeGameBoard height width =
     let random = Random()
 
-    List.init (height * width) (fun index ->
+    List.init (height * width) (fun _ ->
         if random.NextDouble() > 0.41 then
             Live
         else

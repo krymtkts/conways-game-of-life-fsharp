@@ -10,12 +10,12 @@ let inline printGameState game loop =
                         | Live -> "X"
                         | Dead -> " "
     let alive = AliveCount game.Grid
-    printfn "#Loop: %i        Living: %i" loop alive
-    printfn ""
+    $"#Loop: {loop}        Living: {alive}" |> Console.WriteLine
+    "" |> Console.WriteLine
     List.iteri (fun index cell ->
         match index % game.width with
-        | a when a+1 = game.width ->  symbol cell |> printfn "%s"
-        | _ ->  symbol cell |> printf "%s") game.Grid
+        | a when a+1 = game.width ->  symbol cell |> Console.WriteLine
+        | _ ->  symbol cell |> Console.Write) game.Grid
 
 let rec GameLoop game loopNumber =
     do Console.Clear()
@@ -23,7 +23,7 @@ let rec GameLoop game loopNumber =
     do Thread.Sleep(100)
 
     match AliveCount game.Grid with
-    | 0 -> printf "Game Over"
+    | 0 -> "Game Over" |> Console.Write
     | _ -> game |> Cycle |> GameLoop <| 1+loopNumber
 
 let MakeGameBoard height width =
@@ -32,7 +32,7 @@ let MakeGameBoard height width =
 
 [<EntryPoint>]
 let main argv =
-    printfn "Inputs: %A" argv
+    $"Inputs: {argv}" |> Console.WriteLine
     let height = Array.get argv 0 |> Int32.Parse
     let width = Array.get argv 1 |> Int32.Parse
 
